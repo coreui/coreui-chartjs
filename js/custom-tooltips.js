@@ -1,85 +1,117 @@
-/*!
-  * CoreUI (https://coreui.io)
-  * Copyright 2018 Łukasz Holeczek
-  * Licensed under MIT (https://coreui.io)
-  */
+/**
+ * --------------------------------------------------------------------------
+ * CoreUI Plugins - Custom Tooltips for Chart.js (v1.0.0): custom-tooltips.js
+ * Licensed under MIT (https://coreui.io/license)
+ * --------------------------------------------------------------------------
+ */
 
 
-var customTooltips = function(tooltip) {
-  var canvasId = this._chart.canvas.id
-  // Tooltip Element
-  var tooltipEl = document.getElementById(canvasId + '-tooltip');
+const CustomTooltips = function (tooltipModel) {
+  const ClassName = {
+    ABOVE                   : 'above',
+    BELOW                   : 'below',
+    CHARTJS_TOOLTIP         : 'chartjs-tooltip',
+    NO_TRANSFORM            : 'no-transform',
+    TOOLTIP_BODY            : 'tooltip-body',
+    TOOLTIP_BODY_ITEM       : 'tooltip-body-item',
+    TOOLTIP_BODY_ITEM_COLOR : 'tooltip-body-item-color',
+    TOOLTIP_BODY_ITEM_LABEL : 'tooltip-body-item-label',
+    TOOLTIP_BODY_ITEM_VALUE : 'tooltip-body-item-value',
+    TOOLTIP_HEADER          : 'tooltip-header',
+    TOOLTIP_HEADER_ITEM     : 'tooltip-header-item'
+  }
 
-  if (!tooltipEl) {
-    tooltipEl = document.createElement('div');
-    tooltipEl.id = canvasId + '-tooltip';
-    tooltipEl.className = 'chartjs-tooltip';
-    this._chart.canvas.parentNode.appendChild(tooltipEl);
+  const Selector = {
+    DIV     : 'div',
+    SPAN    : 'span',
+    TOOLTIP : `${this._chart.canvas.id}-tooltip`
+  }
+
+  let tooltip = document.getElementById(Selector.TOOLTIP)
+
+  if (!tooltip) {
+    tooltip = document.createElement('div')
+    tooltip.id = Selector.TOOLTIP
+    tooltip.className = ClassName.CHARTJS_TOOLTIP
+    this._chart.canvas.parentNode.appendChild(tooltip)
   }
 
   // Hide if no tooltip
-  if (tooltip.opacity === 0) {
-    tooltipEl.style.opacity = 0;
-    return;
+  if (tooltipModel.opacity === 0) {
+    tooltip.style.opacity = 0
+    return
   }
 
   // Set caret Position
-  tooltipEl.classList.remove('above', 'below', 'no-transform');
-  if (tooltip.yAlign) {
-    tooltipEl.classList.add(tooltip.yAlign);
-  } else {
-    tooltipEl.classList.add('no-transform');
-  }
-
-  function getBody(bodyItem) {
-    return bodyItem.lines;
-  }
+  tooltip.classList.remove(ClassName.ABOVE, ClassName.BELOW, ClassName.NO_TRANSFORM)
+  tooltipModel.yAlign ? tooltip.classList.add(tooltipModel.yAlign) : tooltip.classList.add(ClassName.NO_TRANSFORM)
 
   // Set Text
-  if (tooltip.body) {
-    var titleLines = tooltip.title || [];
-    var bodyLines = tooltip.body.map(getBody);
-    console.log(tooltip.body);
+  if (tooltipModel.body) {
+    const titleLines = tooltipModel.title || []
 
-    var innerHtml = '<div class="tooltip-header">';
+    const tooltipHeader = document.createElement(Selector.DIV)
+    tooltipHeader.className = ClassName.TOOLTIP_HEADER
 
-    titleLines.forEach(function(title) {
-      innerHtml += '<div class="tooltip-header-item">' + title + '</div>';
-    });
-    innerHtml += '</div>';
-    innerHtml += '<div class="tooltip-body">';
+    titleLines.forEach((title) => {
+      const tooltipHeaderTitle = document.createElement(Selector.DIV)
+      tooltipHeaderTitle.className = ClassName.TOOLTIP_HEADER_ITEM
+      tooltipHeaderTitle.innerHTML = title
+      tooltipHeader.appendChild(tooltipHeaderTitle)
+    })
 
-    bodyLines.forEach(function(body, i) {
-      var colors = tooltip.labelColors[i];
-      var style = 'background:' + colors.backgroundColor;
-      style += '; border-color:' + colors.borderColor;
-      style += '; border-width: 2px';
-      console.log(body[0].split(':').length > 1);
-      if (body[0].split(':').length > 1) {
-        var text = body[0].split(': ')[0];
-        var value = body[0].split(': ').pop();
-        var body = [text + '<span class="tooltip-body-item-value">' + value + '</span>'];
+    const tooltipBody = document.createElement(Selector.DIV)
+    tooltipBody.className = ClassName.TOOLTIP_BODY
+
+    const tooltipBodyItems = tooltipModel.body.map((item) => item.lines)
+    tooltipBodyItems.forEach((item, i) => {
+      const tooltipBodyItem = document.createElement(Selector.DIV)
+      tooltipBodyItem.className = ClassName.TOOLTIP_BODY_ITEM
+
+      const colors = tooltipModel.labelColors[i]
+
+      const tooltipBodyItemColor = document.createElement(Selector.SPAN)
+      tooltipBodyItemColor.className = ClassName.TOOLTIP_BODY_ITEM_COLOR
+      tooltipBodyItemColor.style.backgroundColor = colors.backgroundColor
+
+      tooltipBodyItem.appendChild(tooltipBodyItemColor)
+
+      if (item[0].split(':').length > 1) {
+        const tooltipBodyItemLabel = document.createElement(Selector.SPAN)
+        tooltipBodyItemLabel.className = ClassName.TOOLTIP_BODY_ITEM_LABEL
+        tooltipBodyItemLabel.innerHTML = item[0].split(': ')[0]
+
+        tooltipBodyItem.appendChild(tooltipBodyItemLabel)
+
+        const tooltipBodyItemValue = document.createElement(Selector.SPAN)
+        tooltipBodyItemValue.className = ClassName.TOOLTIP_BODY_ITEM_VALUE
+        tooltipBodyItemValue.innerHTML = item[0].split(': ').pop()
+
+        tooltipBodyItem.appendChild(tooltipBodyItemValue)
+      } else {
+        const tooltipBodyItemValue = document.createElement(Selector.SPAN)
+        tooltipBodyItemValue.className = ClassName.TOOLTIP_BODY_ITEM_VALUE
+        tooltipBodyItemValue.innerHTML = item[0]
+
+        tooltipBodyItem.appendChild(tooltipBodyItemValue)
       }
-      var span = '<span class="chartjs-tooltip-key" style="' + style + '"></span>';
-      innerHtml += '<div class="tooltip-body-item">' + span + body + '</div>';
-      console.log(body)
-    });
-    innerHtml += '</div>';
 
-    tooltipEl.innerHTML = innerHtml;
+      tooltipBody.appendChild(tooltipBodyItem)
+    })
+
+    tooltip.innerHTML = ''
+
+    tooltip.appendChild(tooltipHeader)
+    tooltip.appendChild(tooltipBody)
   }
 
-  var positionY = this._chart.canvas.offsetTop;
-  var positionX = this._chart.canvas.offsetLeft;
+  const positionY = this._chart.canvas.offsetTop
+  const positionX = this._chart.canvas.offsetLeft
 
   // Display, position, and set styles for font
-  tooltipEl.style.opacity = 1;
-  tooltipEl.style.left = positionX + tooltip.caretX + 'px';
-  tooltipEl.style.top = positionY + tooltip.caretY + 'px';
-};
+  tooltip.style.opacity = 1
+  tooltip.style.left = `${positionX + tooltipModel.caretX}px`
+  tooltip.style.top = `${positionY + tooltipModel.caretY}px`
+}
 
-Chart.defaults.global.pointHitDetectionRadius = 1;
-Chart.defaults.global.tooltips.enabled = false,
-Chart.defaults.global.tooltips.mode =  'index',
-Chart.defaults.global.tooltips.position = 'nearest',
-Chart.defaults.global.tooltips.custom = customTooltips;
+export default CustomTooltips
