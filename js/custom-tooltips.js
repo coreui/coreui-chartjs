@@ -1,12 +1,20 @@
 /**
  * --------------------------------------------------------------------------
- * CoreUI Plugins - Custom Tooltips for Chart.js (v1.0.0): custom-tooltips.js
+ * CoreUI Plugins - Custom Tooltips for Chart.js (v1.1.0): custom-tooltips.js
  * Licensed under MIT (https://coreui.io/license)
  * --------------------------------------------------------------------------
  */
 
+function CustomTooltips(tooltipModel) {
+  // Add unique id if not exist
+  if (!this._chart.canvas.id) {
+    const _hex = 16
+    const _multiply = 0x10000
+    const _idMaker = () => ((1 + Math.random()) * _multiply | 0).toString(_hex)
+    const _canvasId = `_canvas${_idMaker() + _idMaker()}`
+    this._chart.canvas.id = this._chart.canvas.id || _canvasId
+  }
 
-const CustomTooltips = function (tooltipModel) {
   const ClassName = {
     ABOVE                   : 'above',
     BELOW                   : 'below',
@@ -19,15 +27,6 @@ const CustomTooltips = function (tooltipModel) {
     TOOLTIP_BODY_ITEM_VALUE : 'tooltip-body-item-value',
     TOOLTIP_HEADER          : 'tooltip-header',
     TOOLTIP_HEADER_ITEM     : 'tooltip-header-item'
-  }
-
-
-  if (!this._chart.canvas.id) {
-    const _hex = 16
-    const _multiply = 0x10000
-    const _idMaker = () => ((1 + Math.random()) * _multiply | 0).toString(_hex)
-    const _canvasId = `_canvas${_idMaker() + _idMaker()}`
-    this._chart.canvas.id = this._chart.canvas.id || _canvasId
   }
 
   const Selector = {
@@ -53,7 +52,11 @@ const CustomTooltips = function (tooltipModel) {
 
   // Set caret Position
   tooltip.classList.remove(ClassName.ABOVE, ClassName.BELOW, ClassName.NO_TRANSFORM)
-  tooltipModel.yAlign ? tooltip.classList.add(tooltipModel.yAlign) : tooltip.classList.add(ClassName.NO_TRANSFORM)
+  if (tooltipModel.yAlign) {
+    tooltip.classList.add(tooltipModel.yAlign)
+  } else {
+    tooltip.classList.add(ClassName.NO_TRANSFORM)
+  }
 
   // Set Text
   if (tooltipModel.body) {
