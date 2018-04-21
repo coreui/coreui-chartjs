@@ -1,24 +1,11 @@
 /**
  * --------------------------------------------------------------------------
- * CoreUI Plugins - Custom Tooltips for Chart.js (v1.0.0): custom-tooltips.js
+ * CoreUI Plugins - Custom Tooltips for Chart.js (v1.1.0): custom-tooltips.js
  * Licensed under MIT (https://coreui.io/license)
  * --------------------------------------------------------------------------
  */
-var CustomTooltips = function CustomTooltips(tooltipModel) {
-  var ClassName = {
-    ABOVE: 'above',
-    BELOW: 'below',
-    CHARTJS_TOOLTIP: 'chartjs-tooltip',
-    NO_TRANSFORM: 'no-transform',
-    TOOLTIP_BODY: 'tooltip-body',
-    TOOLTIP_BODY_ITEM: 'tooltip-body-item',
-    TOOLTIP_BODY_ITEM_COLOR: 'tooltip-body-item-color',
-    TOOLTIP_BODY_ITEM_LABEL: 'tooltip-body-item-label',
-    TOOLTIP_BODY_ITEM_VALUE: 'tooltip-body-item-value',
-    TOOLTIP_HEADER: 'tooltip-header',
-    TOOLTIP_HEADER_ITEM: 'tooltip-header-item'
-  };
-
+function CustomTooltips(tooltipModel) {
+  // Add unique id if not exist
   if (!this._chart.canvas.id) {
     var _hex = 16;
     var _multiply = 0x10000;
@@ -32,6 +19,19 @@ var CustomTooltips = function CustomTooltips(tooltipModel) {
     this._chart.canvas.id = this._chart.canvas.id || _canvasId;
   }
 
+  var ClassName = {
+    ABOVE: 'above',
+    BELOW: 'below',
+    CHARTJS_TOOLTIP: 'chartjs-tooltip',
+    NO_TRANSFORM: 'no-transform',
+    TOOLTIP_BODY: 'tooltip-body',
+    TOOLTIP_BODY_ITEM: 'tooltip-body-item',
+    TOOLTIP_BODY_ITEM_COLOR: 'tooltip-body-item-color',
+    TOOLTIP_BODY_ITEM_LABEL: 'tooltip-body-item-label',
+    TOOLTIP_BODY_ITEM_VALUE: 'tooltip-body-item-value',
+    TOOLTIP_HEADER: 'tooltip-header',
+    TOOLTIP_HEADER_ITEM: 'tooltip-header-item'
+  };
   var Selector = {
     DIV: 'div',
     SPAN: 'span',
@@ -55,7 +55,13 @@ var CustomTooltips = function CustomTooltips(tooltipModel) {
 
 
   tooltip.classList.remove(ClassName.ABOVE, ClassName.BELOW, ClassName.NO_TRANSFORM);
-  tooltipModel.yAlign ? tooltip.classList.add(tooltipModel.yAlign) : tooltip.classList.add(ClassName.NO_TRANSFORM); // Set Text
+
+  if (tooltipModel.yAlign) {
+    tooltip.classList.add(tooltipModel.yAlign);
+  } else {
+    tooltip.classList.add(ClassName.NO_TRANSFORM);
+  } // Set Text
+
 
   if (tooltipModel.body) {
     var titleLines = tooltipModel.title || [];
@@ -111,5 +117,5 @@ var CustomTooltips = function CustomTooltips(tooltipModel) {
   tooltip.style.opacity = 1;
   tooltip.style.left = positionX + tooltipModel.caretX + "px";
   tooltip.style.top = positionY + tooltipModel.caretY + "px";
-};
+}
 //# sourceMappingURL=custom-tooltips.js.map

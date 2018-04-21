@@ -1,6 +1,6 @@
 {
   "name": "@coreui/coreui-plugin-chartjs-custom-tooltips",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Chart.js custom tooltips designed for CoreUI Templates",
   "keywords": [
     "chart",
@@ -31,7 +31,7 @@
   "main": "dist/js/custom-tooltips.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/coreui/coreui-plugin-chartjs-custom-tooltips.git"
+    "url": "https://githubom/coreui/coreui-plugin-chartjs-custom-tooltips.git"
   },
   "scripts": {
     "increment-version": "node build/increment-version.js",
