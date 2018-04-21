@@ -18,6 +18,20 @@ var CustomTooltips = function CustomTooltips(tooltipModel) {
     TOOLTIP_HEADER: 'tooltip-header',
     TOOLTIP_HEADER_ITEM: 'tooltip-header-item'
   };
+
+  if (!this._chart.canvas.id) {
+    var _hex = 16;
+    var _multiply = 0x10000;
+
+    var _idMaker = function _idMaker() {
+      return ((1 + Math.random()) * _multiply | 0).toString(_hex);
+    };
+
+    var _canvasId = "_canvas" + (_idMaker() + _idMaker());
+
+    this._chart.canvas.id = this._chart.canvas.id || _canvasId;
+  }
+
   var Selector = {
     DIV: 'div',
     SPAN: 'span',
