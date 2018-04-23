@@ -43,20 +43,20 @@
     "watch-js": "nodemon --ignore dist/ -e js -x npm run js"
   },
   "devDependencies": {
-    "@babel/cli": "7.0.0-beta.42",
-    "@babel/core": "7.0.0-beta.42",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.42",
-    "@babel/preset-env": "7.0.0-beta.42",
-    "babel-eslint": "^8.2.2",
-    "babel-plugin-istanbul": "^4.1.5",
+    "@babel/cli": "7.0.0-beta.46",
+    "@babel/core": "7.0.0-beta.46",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.46",
+    "@babel/preset-env": "7.0.0-beta.46",
+    "babel-eslint": "^8.2.3",
+    "babel-plugin-istanbul": "^4.1.6",
     "babel-plugin-transform-es2015-modules-strip": "^0.1.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "cross-env": "^5.1.4",
-    "eslint": "^4.16.0",
-    "eslint-plugin-compat": "^2.1.0",
-    "nodemon": "^1.12.1",
+    "eslint": "^4.19.1",
+    "eslint-plugin-compat": "^2.2.0",
+    "nodemon": "^1.17.3",
     "npm-run-all": "^4.1.2",
-    "uglify-js": "^3.3.8"
+    "uglify-js": "^3.3.22"
   },
   "peerDependencies": {
     "chart.js": "^2.7.2"
