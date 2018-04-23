@@ -7,12 +7,15 @@
 
 function CustomTooltips(tooltipModel) {
   // Add unique id if not exist
-  if (!this._chart.canvas.id) {
-    const _hex = 16
-    const _multiply = 0x10000
-    const _idMaker = () => ((1 + Math.random()) * _multiply | 0).toString(_hex)
-    const _canvasId = `_canvas${_idMaker() + _idMaker()}`
-    this._chart.canvas.id = this._chart.canvas.id || _canvasId
+  const _setCanvasId = () => {
+    const _idMaker = () => {
+      const _hex = 16
+      const _multiplier = 0x10000
+      return ((1 + Math.random()) * _multiplier | 0).toString(_hex)
+    }
+    const _canvasId = `_canvas-${_idMaker() + _idMaker()}`
+    this._chart.canvas.id = _canvasId
+    return _canvasId
   }
 
   const ClassName = {
@@ -32,7 +35,7 @@ function CustomTooltips(tooltipModel) {
   const Selector = {
     DIV     : 'div',
     SPAN    : 'span',
-    TOOLTIP : `${this._chart.canvas.id}-tooltip`
+    TOOLTIP : `${this._chart.canvas.id || _setCanvasId()}-tooltip`
   }
 
   let tooltip = document.getElementById(Selector.TOOLTIP)
