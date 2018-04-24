@@ -1,6 +1,6 @@
 {
   "name": "@coreui/coreui-plugin-chartjs-custom-tooltips",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Chart.js custom tooltips designed for CoreUI Templates",
   "keywords": [
     "chart",
@@ -28,34 +28,54 @@
     "dist/",
     "js/"
   ],
-  "main": "dist/js/custom-tooltips.js",
+  "main": "dist/cjs/custom-tooltips.js",
+  "module": "dist/esm/custom-tooltips.js",
+  "browser": "dist/umd/custom-tooltips.js",
+  "browserMin": "dist/umd/custom-tooltips.min.js",
   "repository": {
     "type": "git",
     "url": "https://githubom/coreui/coreui-plugin-chartjs-custom-tooltips.git"
   },
   "scripts": {
+    "clean": "rimraf dist",
     "increment-version": "node build/increment-version.js",
     "js": "npm-run-all js-compile* js-minify* js-lint",
     "js-lint": "eslint js/",
     "js-compile": "cross-env PLUGINS=true babel js/ --out-dir dist/js/ --source-maps",
     "js-minify": "uglifyjs --compress typeofs=false --mangle --comments \"/^!/\" --source-map \"content=dist/js/custom-tooltips.js.map,includeSources,url=custom-tooltips.min.js.map\" --output dist/js/custom-tooltips.min.js dist/js/custom-tooltips.js",
     "release-version": "node build/change-version.js",
-    "watch-js": "nodemon --ignore dist/ -e js -x npm run js"
+    "watch-js": "nodemon --ignore dist/ -e js -x npm run js",
+    "build": "npm-run-all clean build:roll js",
+    "build:roll": "rollup -c",
+    "dev": "rollup -c -w"
+  },
+  "dependencies": {
+    "ms": "^2.1.1"
   },
   "devDependencies": {
     "@babel/cli": "7.0.0-beta.46",
     "@babel/core": "7.0.0-beta.46",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.46",
     "@babel/preset-env": "7.0.0-beta.46",
-    "babel-eslint": "^8.2.3",
+    "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-istanbul": "^4.1.6",
     "babel-plugin-transform-es2015-modules-strip": "^0.1.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-minify": "^0.4.0",
     "cross-env": "^5.1.4",
     "eslint": "^4.19.1",
     "eslint-plugin-compat": "^2.2.0",
     "nodemon": "^1.17.3",
     "npm-run-all": "^4.1.2",
+    "rimraf": "^2.6.2",
+    "rollup": "^0.58.2",
+    "rollup-plugin-babel": "^4.0.0-beta.4",
+    "rollup-plugin-babel-minify": "^4.0.0",
+    "rollup-plugin-commonjs": "^9.1.0",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-uglify": "^3.0.0",
+    "shelljs": "^0.8.1",
     "uglify-js": "^3.3.22"
   },
   "peerDependencies": {

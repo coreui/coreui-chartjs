@@ -1,3 +1,7 @@
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
 /**
  * --------------------------------------------------------------------------
  * CoreUI Plugins - Custom Tooltips for Chart.js (v1.2.0): custom-tooltips.js
@@ -120,4 +124,6 @@ function CustomTooltips(tooltipModel) {
   tooltip.style.left = positionX + tooltipModel.caretX + "px";
   tooltip.style.top = positionY + tooltipModel.caretY + "px";
 }
+
+exports.CustomTooltips = CustomTooltips;
 //# sourceMappingURL=custom-tooltips.js.map
