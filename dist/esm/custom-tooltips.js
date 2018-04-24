@@ -120,4 +120,6 @@ function CustomTooltips(tooltipModel) {
   tooltip.style.left = positionX + tooltipModel.caretX + "px";
   tooltip.style.top = positionY + tooltipModel.caretY + "px";
 }
+
+export { CustomTooltips };
 //# sourceMappingURL=custom-tooltips.js.map

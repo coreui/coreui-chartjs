@@ -15,7 +15,7 @@ module.exports = {
   ].filter(Boolean),
   env: {
     test: {
-      plugins: [ 'istanbul' ]
+      plugins: [ 'istanbul', "external-helpers" ]
     }
   }
 };
