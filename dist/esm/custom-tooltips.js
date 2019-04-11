@@ -121,5 +121,7 @@ function CustomTooltips(tooltipModel) {
   tooltip.style.top = positionY + tooltipModel.caretY + "px";
 }
 
-export { CustomTooltips };
+var customTooltips = CustomTooltips; // TODO: camel-case
+
+export { CustomTooltips, customTooltips };
 //# sourceMappingURL=custom-tooltips.js.map
