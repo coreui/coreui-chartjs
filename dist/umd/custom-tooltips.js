@@ -127,7 +127,10 @@
     tooltip.style.top = positionY + tooltipModel.caretY + "px";
   }
 
+  var customTooltips = CustomTooltips; // TODO: camel-case
+
   exports.CustomTooltips = CustomTooltips;
+  exports.customTooltips = customTooltips;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
