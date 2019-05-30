@@ -1,12 +1,12 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (factory((global['custom-tooltips'] = {})));
-}(this, (function (exports) { 'use strict';
+  (global = global || self, factory(global['custom-tooltips'] = {}));
+}(this, function (exports) { 'use strict';
 
   /**
    * --------------------------------------------------------------------------
-   * CoreUI Plugins - Custom Tooltips for Chart.js (v1.2.0): custom-tooltips.js
+   * CoreUI Plugins - Custom Tooltips for Chart.js (v1.3.1): custom-tooltips.js
    * Licensed under MIT (https://coreui.io/license)
    * --------------------------------------------------------------------------
    */
@@ -119,12 +119,25 @@
       tooltip.appendChild(tooltipBody);
     }
 
+    var position = this._chart.canvas.getBoundingClientRect();
+
     var positionY = this._chart.canvas.offsetTop;
-    var positionX = this._chart.canvas.offsetLeft; // Display, position, and set styles for font
+    var positionX = this._chart.canvas.offsetLeft;
+    var positionLeft = positionX + tooltipModel.caretX;
+    var positionTop = positionY + tooltipModel.caretY; // eslint-disable-next-line
+
+    var halfWidth = tooltipModel.width / 2;
+
+    if (positionLeft + halfWidth > position.width) {
+      positionLeft -= halfWidth;
+    } else if (positionLeft < halfWidth) {
+      positionLeft += halfWidth;
+    } // Display, position, and set styles for font
+
 
     tooltip.style.opacity = 1;
-    tooltip.style.left = positionX + tooltipModel.caretX + "px";
-    tooltip.style.top = positionY + tooltipModel.caretY + "px";
+    tooltip.style.left = positionLeft + "px";
+    tooltip.style.top = positionTop + "px";
   }
 
   var customTooltips = CustomTooltips; // TODO: camel-case
@@ -134,5 +147,5 @@
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=custom-tooltips.js.map
