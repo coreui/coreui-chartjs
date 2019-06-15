@@ -1,6 +1,6 @@
 {
   "name": "@coreui/coreui-plugin-chartjs-custom-tooltips",
-  "version": "1.3.1",
+  "version": "2.0.0-alpha.0",
   "description": "Chart.js custom tooltips designed for CoreUI Templates",
   "keywords": [
     "chart",
@@ -26,18 +26,26 @@
   ],
   "files": [
     "dist/",
-    "js/"
+    "js/",
+    "scss/"
   ],
   "main": "dist/cjs/custom-tooltips.js",
   "module": "dist/esm/custom-tooltips.js",
   "browser": "dist/umd/custom-tooltips.js",
   "browserMin": "dist/umd/custom-tooltips.min.js",
+  "sass": "scss/coreui.scss",
+  "style": "dist/css/custom-tooltips.min.css",
   "repository": {
     "type": "git",
     "url": "https://githubom/coreui/coreui-plugin-chartjs-custom-tooltips.git"
   },
   "scripts": {
+    "css": "npm-run-all --sequential css-compile* css-prefix* css-minify*",
+    "css-compile": "node-sass --output-style expanded --source-map true --source-map-contents true --precision 8 scss/style.scss dist/css/custom-tooltips.css",
+    "css-minify": "cleancss --level 2 --format breaksWith=lf --source-map --source-map-inline-sources --output dist/css/custom-tooltips.min.css dist/css/custom-tooltips.css",
+    "css-prefix": "postcss --config build/postcss.config.js --replace \"dist/css/*.css\" \"!dist/css/*.min.css\"",
     "clean": "rimraf dist",
+    "dist": "npm-run-all clean css js",
     "increment-version": "node build/increment-version.js",
     "js": "npm-run-all js-compile* js-minify* js-lint",
     "js-lint": "eslint js/",
@@ -46,10 +54,12 @@
     "release-version": "node build/change-version.js",
     "watch-js": "nodemon --ignore dist/ -e js -x npm run js",
     "build": "npm-run-all clean build:roll js",
-    "build:roll": "rollup -c",
-    "dev": "rollup -c -w"
+    "build:roll": "rollup --config build/rollup.config.js",
+    "dev": "rollup --config build/rollup.config.js --watch"
   },
   "dependencies": {
+    "@coreui/coreui": "^3.0.0-alpha.12",
+    "chart.js": "^2.8.0",
     "ms": "^2.1.1"
   },
   "devDependencies": {
@@ -57,6 +67,7 @@
     "@babel/core": "^7.4.5",
     "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
+    "autoprefixer": "^9.6.0",
     "babel-eslint": "^10.0.1",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-istanbul": "^5.1.4",
@@ -64,11 +75,14 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-minify": "^0.5.0",
+    "clean-css-cli": "^4.3.0",
     "cross-env": "^5.1.4",
     "eslint": "^5.16.0",
     "eslint-plugin-compat": "^3.1.0",
+    "node-sass": "^4.12.0",
     "nodemon": "^1.19.1",
     "npm-run-all": "^4.1.2",
+    "postcss-cli": "^6.1.2",
     "rimraf": "^2.6.2",
     "rollup": "^1.12.5",
     "rollup-plugin-babel": "^4.3.2",

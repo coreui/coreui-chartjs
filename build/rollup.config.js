@@ -1,14 +1,16 @@
 import babel from 'rollup-plugin-babel'
 import commonjs from 'rollup-plugin-commonjs'
-import pkg from './package.json'
+import pkg from '../package.json'
 import resolve from 'rollup-plugin-node-resolve'
 import uglify from 'rollup-plugin-uglify'
+const banner  = require('./banner.js')
 
 export default [
   // browser-friendly UMD build
   {
     input: 'js/index.js',
     output: {
+      banner,
       name: 'custom-tooltips',
       file: pkg.browser,
       format: 'umd',
@@ -25,6 +27,7 @@ export default [
   {
     input: 'js/index.js',
     output: {
+      banner,
       name: 'custom-tooltips',
       file: pkg.browserMin,
       format: 'umd',
@@ -50,6 +53,7 @@ export default [
     external: ['ms'],
     output: [
       {
+        banner,
         file: pkg.main,
         format: 'cjs',
         sourcemap: true

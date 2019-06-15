@@ -1,7 +1,7 @@
 /**
  * --------------------------------------------------------------------------
- * CoreUI Plugins - Custom Tooltips for Chart.js (v1.3.1): custom-tooltips.js
- * Licensed under MIT (https://coreui.io/license)
+ * Custom Tooltips for Chart.js (v2.0.0-alpha.0): custom-tooltips.js
+ * Licensed under MIT (https://coreui.io/plugins/chart.js)
  * --------------------------------------------------------------------------
  */
 
@@ -18,18 +18,21 @@ function CustomTooltips(tooltipModel) {
     return _canvasId
   }
 
+  // eslint-disable-next-line no-nested-ternary
+  const PREFIX = window.CoreUIDefaults ? window.CoreUIDefaults.prefix ? window.CoreUIDefaults.prefix : 'c-' : 'c-'
+
   const ClassName = {
-    ABOVE                   : 'above',
-    BELOW                   : 'below',
-    CHARTJS_TOOLTIP         : 'chartjs-tooltip',
-    NO_TRANSFORM            : 'no-transform',
-    TOOLTIP_BODY            : 'tooltip-body',
-    TOOLTIP_BODY_ITEM       : 'tooltip-body-item',
-    TOOLTIP_BODY_ITEM_COLOR : 'tooltip-body-item-color',
-    TOOLTIP_BODY_ITEM_LABEL : 'tooltip-body-item-label',
-    TOOLTIP_BODY_ITEM_VALUE : 'tooltip-body-item-value',
-    TOOLTIP_HEADER          : 'tooltip-header',
-    TOOLTIP_HEADER_ITEM     : 'tooltip-header-item'
+    ABOVE                   : `${PREFIX}above`,
+    BELOW                   : `${PREFIX}below`,
+    CHARTJS_TOOLTIP         : `${PREFIX}chartjs-tooltip`,
+    NO_TRANSFORM            : `${PREFIX}no-transform`,
+    TOOLTIP_BODY            : `${PREFIX}tooltip-body`,
+    TOOLTIP_BODY_ITEM       : `${PREFIX}tooltip-body-item`,
+    TOOLTIP_BODY_ITEM_COLOR : `${PREFIX}tooltip-body-item-color`,
+    TOOLTIP_BODY_ITEM_LABEL : `${PREFIX}tooltip-body-item-label`,
+    TOOLTIP_BODY_ITEM_VALUE : `${PREFIX}tooltip-body-item-value`,
+    TOOLTIP_HEADER          : `${PREFIX}tooltip-header`,
+    TOOLTIP_HEADER_ITEM     : `${PREFIX}tooltip-header-item`
   }
 
   const Selector = {
