@@ -1,74 +1,78 @@
-import babel from 'rollup-plugin-babel'
-import commonjs from 'rollup-plugin-commonjs'
-import pkg from '../package.json'
-import resolve from 'rollup-plugin-node-resolve'
-import uglify from 'rollup-plugin-uglify'
+'use strict'
+
+const path = require('path')
+const babel = require('rollup-plugin-babel')
+const commonjs = require('rollup-plugin-commonjs')
+const resolve = require('rollup-plugin-node-resolve')
 const banner  = require('./banner.js')
 
-export default [
-  // browser-friendly UMD build
-  {
-    input: 'js/index.js',
-    output: {
-      banner,
-      name: 'custom-tooltips',
-      file: pkg.browser,
-      format: 'umd',
-      sourcemap: true
-    },
-    plugins: [
-      resolve(), // so Rollup can find `ms`
-      commonjs(), // so Rollup can convert `ms` to an ES module
-      babel({
-        exclude: 'node_modules/**' // only transpile our source code
-      })
+const BUNDLE = process.env.BUNDLE === 'true'
+const ESM = process.env.ESM === 'true'
+
+let fileDest  = `coreui-chartjs${ESM ? '.esm' : ''}`
+const external = ['chart.js']
+const plugins = [
+  babel(ESM ? {
+    // Only transpile our source code
+    exclude: 'node_modules/**',
+    babelrc: false,
+    presets: [
+      [
+        '@babel/env',
+        {
+          loose: true,
+          modules: false,
+          targets: {
+            browsers: [
+              'Chrome >= 60',
+              'Safari >= 10.1',
+              'iOS >= 10.3',
+              'Firefox >= 54',
+              'Edge >= 15'
+            ]
+          }
+        }
+      ]
     ]
-  },
-  {
-    input: 'js/index.js',
-    output: {
-      banner,
-      name: 'custom-tooltips',
-      file: pkg.browserMin,
-      format: 'umd',
-      sourcemap: true
-    },
-    plugins: [
-      resolve(), // so Rollup can find `ms`
-      commonjs(), // so Rollup can convert `ms` to an ES module
-      babel({
-        exclude: 'node_modules/**' // only transpile our source code
-      }),
-      uglify.uglify()
+  } : {
+    // Only transpile our source code
+    exclude: 'node_modules/**',
+    // Include only required helpers
+    externalHelpersWhitelist: [
+      'defineProperties',
+      'createClass',
+      'inheritsLoose',
+      'defineProperty',
+      'objectSpread'
     ]
-  },
-  // CommonJS (for Node) and ES module (for bundlers) build.
-  // (We could have three entries in the configuration array
-  // instead of two, but it's quicker to generate multiple
-  // builds from a single configuration where possible, using
-  // an array for the `output` option, where we can specify
-  // `file` and `format` for each target)
-  {
-    input: 'js/index.js',
-    external: ['ms'],
-    output: [
-      {
-        banner,
-        file: pkg.main,
-        format: 'cjs',
-        sourcemap: true
-      },
-      {
-        file: pkg.module,
-        format: 'es',
-        sourcemap: true
-      }
-    ],
-    plugins: [
-      resolve(),
-      babel({
-        exclude: 'node_modules/**' // only transpile our source code
-      })
-    ]
-  }
+  })
 ]
+const globals = {
+  'chart.js': 'Chart.js'
+}
+
+if (BUNDLE) {
+  fileDest += '.bundle'
+  // Remove last entry in external array to bundle Popper and Perfect Scrollbar
+  external.pop()
+  delete globals['chart.js']
+  plugins.push(resolve())
+}
+
+const rollupConfig = {
+  input: path.resolve(__dirname, `../js/index.${ESM ? 'esm' : 'umd'}.js`),
+  output: {
+    banner,
+    file: path.resolve(__dirname, `../dist/js/${fileDest}.js`),
+    format: ESM ? 'esm' : 'umd',
+    globals
+  },
+  external,
+  plugins
+}
+
+if (!ESM) {
+  rollupConfig.output.name = 'coreui.ChartJS'
+}
+
+module.exports = rollupConfig
