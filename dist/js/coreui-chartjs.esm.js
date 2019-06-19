@@ -136,5 +136,12 @@ function CustomTooltips(tooltipModel) {
   tooltip.style.top = positionTop + "px";
 }
 
+/**
+ * --------------------------------------------------------------------------
+ * Custom Tooltips for Chart.js (v2.0.0-alpha.0): index.esm.js
+ * Licensed under MIT (https://github.com/@coreui/coreui-chartjs/LICENSE)
+ * --------------------------------------------------------------------------
+ */
+
 export { CustomTooltips };
 //# sourceMappingURL=coreui-chartjs.esm.js.map
