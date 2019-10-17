@@ -1,5 +1,5 @@
 /*!
-  * CoreUI Plugins - Chart.js for CoreUI 3 v2.0.0-alpha.0 (https://coreui.io)
+  * CoreUI Plugins - Chart.js for CoreUI 3 v2.0.0-alpha.1 (https://coreui.io)
   * Copyright 2019 Łukasz Holeczek
   * Licensed under MIT (https://coreui.io/plugins/chart.js)
   */
@@ -11,22 +11,22 @@
  */
 function CustomTooltips(tooltipModel) {
   // Add unique id if not exist
-  const _setCanvasId = () => {
-    const _idMaker = () => {
-      const _hex = 16;
-      const _multiplier = 0x10000;
+  var _setCanvasId = () => {
+    var _idMaker = () => {
+      var _hex = 16;
+      var _multiplier = 0x10000;
       return ((1 + Math.random()) * _multiplier | 0).toString(_hex);
     };
 
-    const _canvasId = "_canvas-" + (_idMaker() + _idMaker());
+    var _canvasId = "_canvas-" + (_idMaker() + _idMaker());
 
     this._chart.canvas.id = _canvasId;
     return _canvasId;
   }; // eslint-disable-next-line no-nested-ternary
 
 
-  const PREFIX = window.CoreUIDefaults ? window.CoreUIDefaults.prefix ? window.CoreUIDefaults.prefix : 'c-' : 'c-';
-  const ClassName = {
+  var PREFIX = window.CoreUIDefaults ? window.CoreUIDefaults.prefix ? window.CoreUIDefaults.prefix : 'c-' : 'c-';
+  var ClassName = {
     ABOVE: PREFIX + "above",
     BELOW: PREFIX + "below",
     CHARTJS_TOOLTIP: PREFIX + "chartjs-tooltip",
@@ -39,12 +39,12 @@ function CustomTooltips(tooltipModel) {
     TOOLTIP_HEADER: PREFIX + "tooltip-header",
     TOOLTIP_HEADER_ITEM: PREFIX + "tooltip-header-item"
   };
-  const Selector = {
+  var Selector = {
     DIV: 'div',
     SPAN: 'span',
     TOOLTIP: (this._chart.canvas.id || _setCanvasId()) + "-tooltip"
   };
-  let tooltip = document.getElementById(Selector.TOOLTIP);
+  var tooltip = document.getElementById(Selector.TOOLTIP);
 
   if (!tooltip) {
     tooltip = document.createElement('div');
@@ -71,41 +71,42 @@ function CustomTooltips(tooltipModel) {
 
 
   if (tooltipModel.body) {
-    const titleLines = tooltipModel.title || [];
-    const tooltipHeader = document.createElement(Selector.DIV);
+    var titleLines = tooltipModel.title || [];
+    var tooltipHeader = document.createElement(Selector.DIV);
     tooltipHeader.className = ClassName.TOOLTIP_HEADER;
     titleLines.forEach(title => {
-      const tooltipHeaderTitle = document.createElement(Selector.DIV);
+      var tooltipHeaderTitle = document.createElement(Selector.DIV);
       tooltipHeaderTitle.className = ClassName.TOOLTIP_HEADER_ITEM;
       tooltipHeaderTitle.innerHTML = title;
       tooltipHeader.appendChild(tooltipHeaderTitle);
     });
-    const tooltipBody = document.createElement(Selector.DIV);
+    var tooltipBody = document.createElement(Selector.DIV);
     tooltipBody.className = ClassName.TOOLTIP_BODY;
-    const tooltipBodyItems = tooltipModel.body.map(item => item.lines);
+    var tooltipBodyItems = tooltipModel.body.map(item => item.lines);
     tooltipBodyItems.forEach((item, i) => {
-      const tooltipBodyItem = document.createElement(Selector.DIV);
+      var tooltipBodyItem = document.createElement(Selector.DIV);
       tooltipBodyItem.className = ClassName.TOOLTIP_BODY_ITEM;
-      const colors = tooltipModel.labelColors[i];
-      const tooltipBodyItemColor = document.createElement(Selector.SPAN);
+      var colors = tooltipModel.labelColors[i];
+      var tooltipBodyItemColor = document.createElement(Selector.SPAN);
       tooltipBodyItemColor.className = ClassName.TOOLTIP_BODY_ITEM_COLOR;
       tooltipBodyItemColor.style.backgroundColor = colors.backgroundColor;
       tooltipBodyItem.appendChild(tooltipBodyItemColor);
 
       if (item[0].split(':').length > 1) {
-        const tooltipBodyItemLabel = document.createElement(Selector.SPAN);
+        var tooltipBodyItemLabel = document.createElement(Selector.SPAN);
         tooltipBodyItemLabel.className = ClassName.TOOLTIP_BODY_ITEM_LABEL;
         tooltipBodyItemLabel.innerHTML = item[0].split(': ')[0];
         tooltipBodyItem.appendChild(tooltipBodyItemLabel);
-        const tooltipBodyItemValue = document.createElement(Selector.SPAN);
+        var tooltipBodyItemValue = document.createElement(Selector.SPAN);
         tooltipBodyItemValue.className = ClassName.TOOLTIP_BODY_ITEM_VALUE;
         tooltipBodyItemValue.innerHTML = item[0].split(': ').pop();
         tooltipBodyItem.appendChild(tooltipBodyItemValue);
       } else {
-        const tooltipBodyItemValue = document.createElement(Selector.SPAN);
-        tooltipBodyItemValue.className = ClassName.TOOLTIP_BODY_ITEM_VALUE;
-        tooltipBodyItemValue.innerHTML = item[0];
-        tooltipBodyItem.appendChild(tooltipBodyItemValue);
+        var _tooltipBodyItemValue = document.createElement(Selector.SPAN);
+
+        _tooltipBodyItemValue.className = ClassName.TOOLTIP_BODY_ITEM_VALUE;
+        _tooltipBodyItemValue.innerHTML = item[0];
+        tooltipBodyItem.appendChild(_tooltipBodyItemValue);
       }
 
       tooltipBody.appendChild(tooltipBodyItem);
@@ -115,14 +116,14 @@ function CustomTooltips(tooltipModel) {
     tooltip.appendChild(tooltipBody);
   }
 
-  const position = this._chart.canvas.getBoundingClientRect();
+  var position = this._chart.canvas.getBoundingClientRect();
 
-  const positionY = this._chart.canvas.offsetTop;
-  const positionX = this._chart.canvas.offsetLeft;
-  let positionLeft = positionX + tooltipModel.caretX;
-  const positionTop = positionY + tooltipModel.caretY; // eslint-disable-next-line
+  var positionY = this._chart.canvas.offsetTop;
+  var positionX = this._chart.canvas.offsetLeft;
+  var positionLeft = positionX + tooltipModel.caretX;
+  var positionTop = positionY + tooltipModel.caretY; // eslint-disable-next-line
 
-  const halfWidth = tooltipModel.width / 2;
+  var halfWidth = tooltipModel.width / 2;
 
   if (positionLeft + halfWidth > position.width) {
     positionLeft -= halfWidth;
@@ -135,13 +136,6 @@ function CustomTooltips(tooltipModel) {
   tooltip.style.left = positionLeft + "px";
   tooltip.style.top = positionTop + "px";
 }
-
-/**
- * --------------------------------------------------------------------------
- * Custom Tooltips for Chart.js (v2.0.0-alpha.0): index.esm.js
- * Licensed under MIT (https://github.com/@coreui/coreui-chartjs/LICENSE)
- * --------------------------------------------------------------------------
- */
 
 export { CustomTooltips };
 //# sourceMappingURL=coreui-chartjs.esm.js.map

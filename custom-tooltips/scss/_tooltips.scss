@@ -1,6 +1,6 @@
 // Custom tooltips
 
-.#{$prefix}chartjs-tooltip {
+.c-chartjs-tooltip {
   position: absolute;
   z-index: $zindex-sticky + 1;
   display: flex;
@@ -14,30 +14,30 @@
   transform: translate(-50%, 0);
   @include border-radius($border-radius);
 
-  .#{$prefix}tooltip-header {
+  .c-tooltip-header {
     margin-bottom: ($spacer * .5);
   }
 
-  .#{$prefix}tooltip-header-item {
+  .c-tooltip-header-item {
     font-size: $font-size-sm;
     font-weight: $font-weight-bold;
   }
 
-  .#{$prefix}tooltip-body-item {
+  .c-tooltip-body-item {
     display: flex;
     align-items: center;
     font-size: $font-size-sm;
     white-space: nowrap;
   }
 
-  .#{$prefix}tooltip-body-item-color {
+  .c-tooltip-body-item-color {
     display: inline-block;
     width: $font-size-base;
     height: $font-size-base;
     margin-right: $font-size-base;
   }
 
-  .#{$prefix}tooltip-body-item-value {
+  .c-tooltip-body-item-value {
     padding-left: $spacer;
     margin-left: auto;
     font-weight: $font-weight-bold;
