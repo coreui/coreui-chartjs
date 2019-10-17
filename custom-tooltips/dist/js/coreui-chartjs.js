@@ -15,7 +15,7 @@
    * Licensed under MIT (https://coreui.io/plugins/chart.js)
    * --------------------------------------------------------------------------
    */
-  function CustomTooltips(tooltipModel) {
+  function customTooltips(tooltipModel) {
     var _this = this;
 
     // Add unique id if not exist
@@ -154,7 +154,7 @@
    * --------------------------------------------------------------------------
    */
   var index_umd = {
-    CustomTooltips: CustomTooltips
+    customTooltips: customTooltips
   };
 
   return index_umd;

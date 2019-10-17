@@ -5,7 +5,7 @@
  * --------------------------------------------------------------------------
  */
 
-function CustomTooltips(tooltipModel) {
+function customTooltips(tooltipModel) {
   // Add unique id if not exist
   const _setCanvasId = () => {
     const _idMaker = () => {
@@ -145,4 +145,4 @@ function CustomTooltips(tooltipModel) {
   tooltip.style.top = `${positionTop}px`
 }
 
-export default CustomTooltips
+export default customTooltips

@@ -5,8 +5,8 @@
  * --------------------------------------------------------------------------
  */
 
-import CustomTooltips from './src/custom-tooltips'
+import customTooltips from './src/custom-tooltips'
 
 export {
-  CustomTooltips
+  customTooltips
 }

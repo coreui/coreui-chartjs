@@ -9,7 +9,7 @@
  * Licensed under MIT (https://coreui.io/plugins/chart.js)
  * --------------------------------------------------------------------------
  */
-function CustomTooltips(tooltipModel) {
+function customTooltips(tooltipModel) {
   // Add unique id if not exist
   var _setCanvasId = () => {
     var _idMaker = () => {
@@ -137,5 +137,5 @@ function CustomTooltips(tooltipModel) {
   tooltip.style.top = positionTop + "px";
 }
 
-export { CustomTooltips };
+export { customTooltips };
 //# sourceMappingURL=coreui-chartjs.esm.js.map
