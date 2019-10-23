@@ -25,9 +25,8 @@
     }
   ],
   "files": [
-    "dist/",
-    "js/",
-    "scss/"
+    "custom-tooltips/",
+    "vue/"
   ],
   "repository": {
     "type": "git",
