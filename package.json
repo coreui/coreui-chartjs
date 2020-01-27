@@ -1,6 +1,6 @@
 {
-  "name": "@coreui/coreui-chartjs",
-  "version": "2.0.0-beta.0",
+  "name": "@coreui/chartjs",
+  "version": "2.0.0",
   "description": "Chart.js for CoreUI",
   "keywords": [
     "chart",
@@ -15,13 +15,15 @@
   },
   "license": "MIT",
   "author": {
-    "name": "Łukasz Holeczek",
-    "url": "https://github.com/mrholek"
+    "name": "creativeLabs Łukasz Holeczek",
+    "url": "https://coreui.io",
+    "github": "https://github.com/coreui",
+    "twitter": "https://twitter.com/core_ui"
   },
   "contributors": [
     {
-      "name": "Andrzej Kopański",
-      "url": "https://github.com/xidedix"
+      "name": "CoreUI Core Team",
+      "url": "https://github.com/orgs/coreui/people"
     }
   ],
   "files": [

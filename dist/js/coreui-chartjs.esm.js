@@ -1,7 +1,7 @@
 /*!
-  * CoreUI Plugins - Chart.js for CoreUI 3 v2.0.0-beta.0 (https://coreui.io)
-  * Copyright 2019 Łukasz Holeczek
-  * Licensed under MIT (https://coreui.io/plugins/chart.js)
+  * CoreUI Plugins - Chart.js for CoreUI 3 v2.0.0 (https://coreui.io)
+  * Copyright 2020 creativeLabs Łukasz Holeczek
+  * Licensed under MIT (https://coreui.io/license/)
   */
 import 'chart.js';
 

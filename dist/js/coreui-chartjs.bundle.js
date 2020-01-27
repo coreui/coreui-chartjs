@@ -1,7 +1,7 @@
 /*!
-  * CoreUI Plugins - Chart.js for CoreUI 3 v2.0.0-beta.0 (https://coreui.io)
-  * Copyright 2019 Łukasz Holeczek
-  * Licensed under MIT (https://coreui.io/plugins/chart.js)
+  * CoreUI Plugins - Chart.js for CoreUI 3 v2.0.0 (https://coreui.io)
+  * Copyright 2020 creativeLabs Łukasz Holeczek
+  * Licensed under MIT (https://coreui.io/license/)
   */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -1538,7 +1538,7 @@
 	// generators
 	function hexString(rgba, a) {
 	   var a = (a !== undefined && rgba.length === 3) ? a : rgba[3];
-	   return "#" + hexDouble(rgba[0])
+	   return "#" + hexDouble(rgba[0]) 
 	              + hexDouble(rgba[1])
 	              + hexDouble(rgba[2])
 	              + (

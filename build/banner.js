@@ -8,7 +8,7 @@ function getBanner(pluginFilename) {
   return `/*!
   * CoreUI Plugins - Chart.js for CoreUI 3${pluginFilename ? ` ${pluginFilename}` : ''} v${pkg.version} (${pkg.homepage})
   * Copyright ${year} ${pkg.author.name}
-  * Licensed under MIT (${pkg.homepage}/plugins/chart.js)
+  * Licensed under MIT (${pkg.homepage}/license/)
   */`
 }
 
