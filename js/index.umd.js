@@ -1,6 +1,6 @@
 /**
  * --------------------------------------------------------------------------
- * Custom Tooltips for Chart.js (vv2.0.0-beta.0): index.umd.js
+ * Custom Tooltips for Chart.js (v3.0.0-alpha.0): index.umd.js
  * Licensed under MIT (https://github.com/@coreui/coreui-chartjs/LICENSE)
  * --------------------------------------------------------------------------
  */

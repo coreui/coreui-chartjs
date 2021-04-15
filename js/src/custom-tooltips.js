@@ -1,145 +1,118 @@
 /**
  * --------------------------------------------------------------------------
- * Custom Tooltips for Chart.js (vv2.0.0-beta.0): custom-tooltips.js
+ * Custom Tooltips for Chart.js (v3.0.0-alpha.0): custom-tooltips.js
  * Licensed under MIT (https://coreui.io/plugins/chart.js)
  * --------------------------------------------------------------------------
  */
 
-function customTooltips(tooltipModel) {
-  // Add unique id if not exist
-  const _setCanvasId = () => {
-    const _idMaker = () => {
-      const _hex = 16
-      const _multiplier = 0x10000
-      return ((1 + Math.random()) * _multiplier | 0).toString(_hex)
-    }
-    const _canvasId = `_canvas-${_idMaker() + _idMaker()}`
-    this._chart.canvas.id = _canvasId
-    return _canvasId
+ const ClassName = {
+  TOOLTIP                 : 'chartjs-tooltip',
+  TOOLTIP_BODY            : 'chartjs-tooltip-body',
+  TOOLTIP_BODY_ITEM       : 'chartjs-tooltip-body-item',
+  TOOLTIP_HEADER          : 'chartjs-tooltip-header',
+  TOOLTIP_HEADER_ITEM     : 'chartjs-tooltip-header-item'
+}
+
+const getOrCreateTooltip = (chart) => {
+  let tooltipEl = chart.canvas.parentNode.querySelector('div')
+
+  if (!tooltipEl) {
+    tooltipEl = document.createElement('div')
+    tooltipEl.classList.add(ClassName.TOOLTIP)
+
+    const table = document.createElement('table')
+    table.style.margin = '0px'
+
+    tooltipEl.appendChild(table)
+    chart.canvas.parentNode.appendChild(tooltipEl)
   }
 
-  const ClassName = {
-    ABOVE                   : 'c-above',
-    BELOW                   : 'c-below',
-    CHARTJS_TOOLTIP         : 'c-chartjs-tooltip',
-    NO_TRANSFORM            : 'c-no-transform',
-    TOOLTIP_BODY            : 'c-tooltip-body',
-    TOOLTIP_BODY_ITEM       : 'c-tooltip-body-item',
-    TOOLTIP_BODY_ITEM_COLOR : 'c-tooltip-body-item-color',
-    TOOLTIP_BODY_ITEM_LABEL : 'c-tooltip-body-item-label',
-    TOOLTIP_BODY_ITEM_VALUE : 'c-tooltip-body-item-value',
-    TOOLTIP_HEADER          : 'c-tooltip-header',
-    TOOLTIP_HEADER_ITEM     : 'c-tooltip-header-item'
-  }
+  return tooltipEl
+}
 
-  const Selector = {
-    DIV     : 'div',
-    SPAN    : 'span',
-    TOOLTIP : `${this._chart.canvas.id || _setCanvasId()}-tooltip`
-  }
+function customTooltips(context) {
 
-  let tooltip = document.getElementById(Selector.TOOLTIP)
-
-  if (!tooltip) {
-    tooltip = document.createElement('div')
-    tooltip.id = Selector.TOOLTIP
-    tooltip.className = ClassName.CHARTJS_TOOLTIP
-    this._chart.canvas.parentNode.appendChild(tooltip)
-  }
+  // Tooltip Element
+  const {chart, tooltip} = context
+  const tooltipEl = getOrCreateTooltip(chart)
 
   // Hide if no tooltip
-  if (tooltipModel.opacity === 0) {
-    tooltip.style.opacity = 0
+  if (tooltip.opacity === 0) {
+    tooltipEl.style.opacity = 0
     return
   }
 
-  // Set caret Position
-  tooltip.classList.remove(ClassName.ABOVE, ClassName.BELOW, ClassName.NO_TRANSFORM)
-  if (tooltipModel.yAlign) {
-    tooltip.classList.add(tooltipModel.yAlign)
-  } else {
-    tooltip.classList.add(ClassName.NO_TRANSFORM)
-  }
-
   // Set Text
-  if (tooltipModel.body) {
-    const titleLines = tooltipModel.title || []
+  if (tooltip.body) {
+    const titleLines = tooltip.title || []
+    const bodyLines = tooltip.body.map(b => b.lines)
 
-    const tooltipHeader = document.createElement(Selector.DIV)
-    tooltipHeader.className = ClassName.TOOLTIP_HEADER
+    const tableHead = document.createElement('thead')
+    tableHead.classList.add(ClassName.TOOLTIP_HEADER)
 
-    titleLines.forEach((title) => {
-      const tooltipHeaderTitle = document.createElement(Selector.DIV)
-      tooltipHeaderTitle.className = ClassName.TOOLTIP_HEADER_ITEM
-      tooltipHeaderTitle.innerHTML = title
-      tooltipHeader.appendChild(tooltipHeaderTitle)
+    titleLines.forEach(title => {
+      const tr = document.createElement('tr')
+      tr.style.borderWidth = 0
+      tr.classList.add(ClassName.TOOLTIP_HEADER_ITEM)
+
+      const th = document.createElement('th')
+      th.style.borderWidth = 0
+      const text = document.createTextNode(title)
+
+      th.appendChild(text)
+      tr.appendChild(th)
+      tableHead.appendChild(tr)
     })
 
-    const tooltipBody = document.createElement(Selector.DIV)
-    tooltipBody.className = ClassName.TOOLTIP_BODY
+    const tableBody = document.createElement('tbody')
+    tableBody.classList.add(ClassName.TOOLTIP_BODY)
 
-    const tooltipBodyItems = tooltipModel.body.map((item) => item.lines)
-    tooltipBodyItems.forEach((item, i) => {
-      const tooltipBodyItem = document.createElement(Selector.DIV)
-      tooltipBodyItem.className = ClassName.TOOLTIP_BODY_ITEM
+    bodyLines.forEach((body, i) => {
+      const colors = tooltip.labelColors[i]
 
-      const colors = tooltipModel.labelColors[i]
+      const span = document.createElement('span')
+      span.style.background = colors.backgroundColor
+      span.style.borderColor = colors.borderColor
+      span.style.borderWidth = '2px'
+      span.style.marginRight = '10px'
+      span.style.height = '10px'
+      span.style.width = '10px'
+      span.style.display = 'inline-block'
 
-      const tooltipBodyItemColor = document.createElement(Selector.SPAN)
-      tooltipBodyItemColor.className = ClassName.TOOLTIP_BODY_ITEM_COLOR
-      tooltipBodyItemColor.style.backgroundColor = colors.backgroundColor
+      const tr = document.createElement('tr')
+      tr.classList.add(ClassName.TOOLTIP_BODY_ITEM)
 
-      tooltipBodyItem.appendChild(tooltipBodyItemColor)
+      const td = document.createElement('td')
+      td.style.borderWidth = 0
 
-      if (item[0].split(':').length > 1) {
-        const tooltipBodyItemLabel = document.createElement(Selector.SPAN)
-        tooltipBodyItemLabel.className = ClassName.TOOLTIP_BODY_ITEM_LABEL
-        tooltipBodyItemLabel.innerHTML = item[0].split(': ')[0]
+      const text = document.createTextNode(body)
 
-        tooltipBodyItem.appendChild(tooltipBodyItemLabel)
-
-        const tooltipBodyItemValue = document.createElement(Selector.SPAN)
-        tooltipBodyItemValue.className = ClassName.TOOLTIP_BODY_ITEM_VALUE
-        tooltipBodyItemValue.innerHTML = item[0].split(': ').pop()
-
-        tooltipBodyItem.appendChild(tooltipBodyItemValue)
-      } else {
-        const tooltipBodyItemValue = document.createElement(Selector.SPAN)
-        tooltipBodyItemValue.className = ClassName.TOOLTIP_BODY_ITEM_VALUE
-        tooltipBodyItemValue.innerHTML = item[0]
-
-        tooltipBodyItem.appendChild(tooltipBodyItemValue)
-      }
-
-      tooltipBody.appendChild(tooltipBodyItem)
+      td.appendChild(span)
+      td.appendChild(text)
+      tr.appendChild(td)
+      tableBody.appendChild(tr)
     })
 
-    tooltip.innerHTML = ''
+    const tableRoot = tooltipEl.querySelector('table')
 
-    tooltip.appendChild(tooltipHeader)
-    tooltip.appendChild(tooltipBody)
+    // Remove old children
+    while (tableRoot.firstChild) {
+      tableRoot.firstChild.remove()
+    }
+
+    // Add new children
+    tableRoot.appendChild(tableHead)
+    tableRoot.appendChild(tableBody)
   }
 
-  const position = this._chart.canvas.getBoundingClientRect()
-
-  const positionY = this._chart.canvas.offsetTop
-  const positionX = this._chart.canvas.offsetLeft
-
-  let positionLeft = positionX + tooltipModel.caretX
-  const positionTop = positionY + tooltipModel.caretY
-  // eslint-disable-next-line
-  const halfWidth = tooltipModel.width / 2
-
-  if (positionLeft + halfWidth > position.width) {
-    positionLeft -= halfWidth
-  } else if (positionLeft < halfWidth) {
-    positionLeft += halfWidth
-  }
+  const {offsetLeft: positionX, offsetTop: positionY} = chart.canvas
 
   // Display, position, and set styles for font
-  tooltip.style.opacity = 1
-  tooltip.style.left = `${positionLeft}px`
-  tooltip.style.top = `${positionTop}px`
+  tooltipEl.style.opacity = 1
+  tooltipEl.style.left = positionX + tooltip.caretX + 'px'
+  tooltipEl.style.top = positionY + tooltip.caretY + 'px'
+  tooltipEl.style.font = tooltip.options.bodyFont.string
+  tooltipEl.style.padding = tooltip.padding + 'px ' + tooltip.padding + 'px'
 }
 
 export default customTooltips
