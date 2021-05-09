@@ -20,7 +20,8 @@ const plugins = [
   })
 ]
 const globals = {
-  'chart.js': 'Chart'
+  'chart.js/auto': 'Chart',
+  'chart.js/helpers': 'Chart.helpers'
 }
 
 if (BUNDLE) {
@@ -28,6 +29,7 @@ if (BUNDLE) {
   // Remove last entry in external array to bundle Chart.js
   external.pop()
   delete globals['chart.js']
+  delete globals['chart.js/helpers']
   plugins.push(
     replace(),
     nodeResolve()

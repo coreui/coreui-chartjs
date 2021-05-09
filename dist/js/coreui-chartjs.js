@@ -1,17 +1,17 @@
 /*!
-  * CoreUI Plugins - Chart.js for CoreUI 3 v3.0.0-alpha.0 (https://coreui.io)
+  * CoreUI Plugins - Chart.js for CoreUI 4  v3.0.0-rc.0 (https://coreui.io)
   * Copyright 2021 creativeLabs Łukasz Holeczek
   * Licensed under MIT (https://coreui.io/license/)
   */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('chart.js')) :
-  typeof define === 'function' && define.amd ? define(['chart.js'], factory) :
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, (global.coreui = global.coreui || {}, global.coreui.ChartJS = factory()));
 }(this, (function () { 'use strict';
 
   /**
    * --------------------------------------------------------------------------
-   * Custom Tooltips for Chart.js (v3.0.0-alpha.0): custom-tooltips.js
+   * Custom Tooltips for Chart.js (v3.0.0-rc.0): custom-tooltips.js
    * Licensed under MIT (https://coreui.io/plugins/chart.js)
    * --------------------------------------------------------------------------
    */
@@ -38,7 +38,7 @@
     return tooltipEl;
   };
 
-  function customTooltips(context) {
+  const customTooltips = context => {
     // Tooltip Element
     const {
       chart,
@@ -111,11 +111,11 @@
     tooltipEl.style.top = positionY + tooltip.caretY + 'px';
     tooltipEl.style.font = tooltip.options.bodyFont.string;
     tooltipEl.style.padding = tooltip.padding + 'px ' + tooltip.padding + 'px';
-  }
+  };
 
   /**
    * --------------------------------------------------------------------------
-   * Custom Tooltips for Chart.js (v3.0.0-alpha.0): index.umd.js
+   * Custom Tooltips for Chart.js (v3.0.0-rc.0): index.umd.js
    * Licensed under MIT (https://github.com/@coreui/coreui-chartjs/LICENSE)
    * --------------------------------------------------------------------------
    */

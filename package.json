@@ -1,6 +1,6 @@
 {
   "name": "@coreui/chartjs",
-  "version": "3.0.0-alpha.0",
+  "version": "3.0.0-rc.0",
   "description": "Chart.js for CoreUI",
   "keywords": [
     "chart",
@@ -55,13 +55,14 @@
     "js-compile": "npm-run-all --parallel js-compile-*",
     "js-compile-standalone": "rollup --environment BUNDLE:false --config build/rollup.config.js --sourcemap",
     "js-compile-standalone-esm": "rollup --environment ESM:true,BUNDLE:false --config build/rollup.config.js --sourcemap",
-    "js-compile-bundle": "rollup --environment BUNDLE:true --config build/rollup.config.js --sourcemap",
     "js-lint": "eslint --cache --cache-location .cache/.eslintcache --report-unused-disable-directives .",
     "js-minify": "npm-run-all --parallel js-minify-*",
     "js-minify-standalone": "terser --compress --mangle --comments \"/^!/\" --source-map \"content=dist/js/coreui-chartjs.js.map,includeSources,url=coreui-chartjs.min.js.map\" --output dist/js/coreui-chartjs.min.js dist/js/coreui-chartjs.js",
     "js-minify-standalone-esm": "terser --compress --mangle --comments \"/^!/\" --source-map \"content=dist/js/coreui-chartjs.esm.js.map,includeSources,url=coreui-chartjs.esm.min.js.map\" --output dist/js/coreui-chartjs.esm.min.js dist/js/coreui-chartjs.esm.js",
-    "js-minify-bundle": "terser --compress --mangle --comments \"/^!/\" --source-map \"content=dist/js/coreui-chartjs.bundle.js.map,includeSources,url=coreui-chartjs.bundle.min.js.map\" --output dist/js/coreui-chartjs.bundle.min.js dist/js/coreui-chartjs.bundle.js",
-    "release": "npm-run-all clean --parallel css js",
+    "dist": "npm-run-all --parallel css js",
+    "release": "npm-run-all clean dist release-zip*",
+    "release-version": "node build/change-version.js",
+    "release-zip": "cross-env-shell \"rm -rf coreui-$npm_package_version-dist && cp -r dist/ coreui-$npm_package_version-dist && zip -r9 coreui-$npm_package_version-dist.zip coreui-$npm_package_version-dist && rm -rf coreui-$npm_package_version-dist\"",
     "watch-js": "nodemon --ignore dist/ -e js -x npm run js"
   },
   "dependencies": {

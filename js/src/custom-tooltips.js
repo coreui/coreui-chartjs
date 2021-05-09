@@ -1,19 +1,19 @@
 /**
  * --------------------------------------------------------------------------
- * Custom Tooltips for Chart.js (v3.0.0-alpha.0): custom-tooltips.js
+ * Custom Tooltips for Chart.js (v3.0.0-rc.0): custom-tooltips.js
  * Licensed under MIT (https://coreui.io/plugins/chart.js)
  * --------------------------------------------------------------------------
  */
 
- const ClassName = {
-  TOOLTIP                 : 'chartjs-tooltip',
-  TOOLTIP_BODY            : 'chartjs-tooltip-body',
-  TOOLTIP_BODY_ITEM       : 'chartjs-tooltip-body-item',
-  TOOLTIP_HEADER          : 'chartjs-tooltip-header',
-  TOOLTIP_HEADER_ITEM     : 'chartjs-tooltip-header-item'
+const ClassName = {
+  TOOLTIP: 'chartjs-tooltip',
+  TOOLTIP_BODY: 'chartjs-tooltip-body',
+  TOOLTIP_BODY_ITEM: 'chartjs-tooltip-body-item',
+  TOOLTIP_HEADER: 'chartjs-tooltip-header',
+  TOOLTIP_HEADER_ITEM: 'chartjs-tooltip-header-item'
 }
 
-const getOrCreateTooltip = (chart) => {
+const getOrCreateTooltip = chart => {
   let tooltipEl = chart.canvas.parentNode.querySelector('div')
 
   if (!tooltipEl) {
@@ -30,10 +30,9 @@ const getOrCreateTooltip = (chart) => {
   return tooltipEl
 }
 
-function customTooltips(context) {
-
+const customTooltips = context => {
   // Tooltip Element
-  const {chart, tooltip} = context
+  const { chart, tooltip } = context
   const tooltipEl = getOrCreateTooltip(chart)
 
   // Hide if no tooltip
@@ -105,7 +104,7 @@ function customTooltips(context) {
     tableRoot.appendChild(tableBody)
   }
 
-  const {offsetLeft: positionX, offsetTop: positionY} = chart.canvas
+  const { offsetLeft: positionX, offsetTop: positionY } = chart.canvas
 
   // Display, position, and set styles for font
   tooltipEl.style.opacity = 1

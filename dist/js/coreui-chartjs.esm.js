@@ -1,13 +1,11 @@
 /*!
-  * CoreUI Plugins - Chart.js for CoreUI 3 v3.0.0-alpha.0 (https://coreui.io)
+  * CoreUI Plugins - Chart.js for CoreUI 4  v3.0.0-rc.0 (https://coreui.io)
   * Copyright 2021 creativeLabs Łukasz Holeczek
   * Licensed under MIT (https://coreui.io/license/)
   */
-import 'chart.js';
-
 /**
  * --------------------------------------------------------------------------
- * Custom Tooltips for Chart.js (v3.0.0-alpha.0): custom-tooltips.js
+ * Custom Tooltips for Chart.js (v3.0.0-rc.0): custom-tooltips.js
  * Licensed under MIT (https://coreui.io/plugins/chart.js)
  * --------------------------------------------------------------------------
  */
@@ -34,7 +32,7 @@ const getOrCreateTooltip = chart => {
   return tooltipEl;
 };
 
-function customTooltips(context) {
+const customTooltips = context => {
   // Tooltip Element
   const {
     chart,
@@ -107,7 +105,7 @@ function customTooltips(context) {
   tooltipEl.style.top = positionY + tooltip.caretY + 'px';
   tooltipEl.style.font = tooltip.options.bodyFont.string;
   tooltipEl.style.padding = tooltip.padding + 'px ' + tooltip.padding + 'px';
-}
+};
 
 export { customTooltips };
 //# sourceMappingURL=coreui-chartjs.esm.js.map
