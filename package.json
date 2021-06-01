@@ -35,6 +35,7 @@
   "sass": "scss/coreui-chartjs.scss",
   "main": "dist/js/coreui-chartjs.js",
   "module": "dist/js/coreui-chartjs.esm.js",
+  "types": "js/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/coreui/coreui-chartjs.git"
