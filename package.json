@@ -67,8 +67,8 @@
     "watch-js": "nodemon --ignore dist/ -e js -x npm run js"
   },
   "dependencies": {
-    "@coreui/coreui": "5.0.0-alpha.0",
-    "chart.js": "^4.1.1"
+    "@coreui/coreui": "^4.2.6",
+    "chart.js": "^3.9.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.20.7",
