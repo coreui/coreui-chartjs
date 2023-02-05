@@ -1,19 +1,18 @@
 'use strict'
 
-module.exports = ctx => {
+const mapConfig = {
+  inline: false,
+  annotation: true,
+  sourcesContent: true
+}
+
+module.exports = () => {
   return {
-    map: ctx.file.dirname.includes('examples') ?
-      false :
-      {
-        inline: false,
-        annotation: true,
-        sourcesContent: true
-      },
+    map: mapConfig,
     plugins: {
       autoprefixer: {
         cascade: false
-      },
-      'postcss-combine-duplicated-selectors': {}
+      }
     }
   }
 }
