@@ -12,7 +12,7 @@
 - update `babel-plugin-istanbul` to `^5.1.4`
 - update `babel-preset-minify` to `^0.5.0`
 - update `eslint` to `^5.16.0`
-- update `eslint-plugin-compat` to `^3.1.0`
+- update `eslint-plugin-compat` to `^3.1.1`
 - update `nodemon` to `^1.19.1`
 - update `rollup` to `^1.12.5`
 - update `rollup-plugin-babel-minify` to `^8.0.0`
