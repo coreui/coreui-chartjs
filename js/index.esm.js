@@ -1,6 +1,6 @@
 /**
  * --------------------------------------------------------------------------
- * Custom Tooltips for Chart.js (v3.1.1): index.esm.js
+ * Custom Tooltips for Chart.js (v3.1.2): index.esm.js
  * Licensed under MIT (https://github.com/@coreui/coreui-chartjs/LICENSE)
  * --------------------------------------------------------------------------
  */

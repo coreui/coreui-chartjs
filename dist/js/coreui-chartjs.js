@@ -1,5 +1,5 @@
 /*!
-  * CoreUI Plugins - Chart.js for CoreUI v5 v3.1.1 (https://coreui.io)
+  * CoreUI Plugins - Chart.js for CoreUI v5 v3.1.2 (https://coreui.io)
   * Copyright 2023 creativeLabs Łukasz Holeczek
   * Licensed under MIT (https://github.com/coreui/coreui-chartjs/blob/main/LICENSE)
   */
@@ -11,7 +11,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Custom Tooltips for Chart.js (v3.1.1): custom-tooltips.js
+   * Custom Tooltips for Chart.js (v3.1.2): custom-tooltips.js
    * Licensed under MIT (https://coreui.io/plugins/chart.js)
    * --------------------------------------------------------------------------
    */
@@ -114,7 +114,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Custom Tooltips for Chart.js (v3.1.1): index.umd.js
+   * Custom Tooltips for Chart.js (v3.1.2): index.umd.js
    * Licensed under MIT (https://github.com/@coreui/coreui-chartjs/LICENSE)
    * --------------------------------------------------------------------------
    */

@@ -1,6 +1,6 @@
 /**
  * --------------------------------------------------------------------------
- * Custom Tooltips for Chart.js (v3.1.1): custom-tooltips.js
+ * Custom Tooltips for Chart.js (v3.1.2): custom-tooltips.js
  * Licensed under MIT (https://coreui.io/plugins/chart.js)
  * --------------------------------------------------------------------------
  */
