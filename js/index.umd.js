@@ -6,7 +6,7 @@
  */
 
 // eslint-disable-next-line no-unused-vars
-import customTooltips from './src/custom-tooltips'
+import customTooltips from './src/custom-tooltips.js'
 
 export default {
   customTooltips

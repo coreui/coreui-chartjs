@@ -5,8 +5,4 @@
  * --------------------------------------------------------------------------
  */
 
-import customTooltips from './src/custom-tooltips'
-
-export {
-  customTooltips
-}
+export { default as customTooltips } from './src/custom-tooltips.js'
