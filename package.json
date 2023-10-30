@@ -66,7 +66,7 @@
     "watch-js": "nodemon --ignore dist/ -e js -x npm run js"
   },
   "dependencies": {
-    "@coreui/coreui": "^5.0.0-alpha.2",
+    "@coreui/coreui": "^5.0.0-beta.0",
     "chart.js": "^4.4.0"
   },
   "devDependencies": {
@@ -74,16 +74,16 @@
     "@babel/core": "^7.23.2",
     "@babel/preset-env": "^7.23.2",
     "@rollup/plugin-babel": "^6.0.4",
-    "@rollup/plugin-commonjs": "^25.0.5",
+    "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-replace": "^5.0.3",
+    "@rollup/plugin-replace": "^5.0.5",
     "auto-changelog": "^2.4.0",
     "autoprefixer": "^10.4.16",
     "clean-css-cli": "^5.6.2",
     "cross-env": "^7.0.3",
-    "eslint": "^8.51.0",
+    "eslint": "^8.52.0",
     "eslint-config-xo": "^0.43.1",
-    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-unicorn": "^48.0.1",
     "find-unused-sass-variables": "^5.0.0",
     "globby": "^11.1.0",
@@ -92,12 +92,12 @@
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0",
-    "rollup": "^4.0.2",
+    "rollup": "^4.1.5",
     "rollup-plugin-istanbul": "^4.0.0",
-    "sass": "^1.69.3",
+    "sass": "^1.69.5",
     "shelljs": "^0.8.5",
-    "stylelint": "^15.10.3",
+    "stylelint": "^15.11.0",
     "stylelint-config-twbs-bootstrap": "^11.0.1",
-    "terser": "5.21.0"
+    "terser": "5.23.0"
   }
 }
