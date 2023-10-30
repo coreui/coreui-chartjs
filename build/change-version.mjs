@@ -16,10 +16,8 @@ const DRY_RUN = process.argv.includes('--dry') || process.argv.includes('--dry-r
 // These are the files we only care about replacing the version
 const FILES = [
   'README.md',
-  'hugo.yml',
-  'js/src/base-component.js',
-  'package.js',
-  'scss/mixins/_banner.scss'
+  'js/src/custom-tooltips.js',
+  'scss/coreui-chartjs.scss'
 ]
 
 // Blame TC39... https://github.com/benjamingr/RegExp.escape/issues/37

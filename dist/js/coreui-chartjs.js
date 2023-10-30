@@ -1,5 +1,5 @@
 /*!
-  * CoreUI v4.0.0-alpha.0 (https://coreui.io)
+  * CoreUI v4.0.0-beta.0 (https://coreui.io)
   * Copyright 2023 [object Object]
   * Licensed under MIT (https://github.com/coreui/coreui-chartjs/blob/main/LICENSE)
   */
@@ -11,7 +11,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Custom Tooltips for Chart.js (v4.0.0-alpha.0): custom-tooltips.js
+   * Custom Tooltips for Chart.js (v4.0.0-beta.0): custom-tooltips.js
    * Licensed under MIT (https://coreui.io/plugins/chart.js)
    * --------------------------------------------------------------------------
    */
