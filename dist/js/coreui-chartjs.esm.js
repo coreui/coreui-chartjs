@@ -1,12 +1,12 @@
 /*!
-  * CoreUI Plugins - Chart.js for CoreUI v5 v3.1.2 (https://coreui.io)
-  * Copyright 2023 creativeLabs Łukasz Holeczek
+  * CoreUI v4.0.0 (https://coreui.io)
+  * Copyright 2024 [object Object]
   * Licensed under MIT (https://github.com/coreui/coreui-chartjs/blob/main/LICENSE)
   */
 /**
  * --------------------------------------------------------------------------
- * Custom Tooltips for Chart.js (v3.1.2): custom-tooltips.js
- * Licensed under MIT (https://coreui.io/plugins/chart.js)
+ * Custom Tooltips for Chart.js (v4.0.0): custom-tooltips.js
+ * Licensed under MIT (https://github.com/coreui/coreui-chartjs/blob/main/LICENSE)
  * --------------------------------------------------------------------------
  */
 
@@ -24,8 +24,8 @@ const getOrCreateTooltip = chart => {
     tooltipEl.classList.add(ClassName.TOOLTIP);
     const table = document.createElement('table');
     table.style.margin = '0px';
-    tooltipEl.appendChild(table);
-    chart.canvas.parentNode.appendChild(tooltipEl);
+    tooltipEl.append(table);
+    chart.canvas.parentNode.append(tooltipEl);
   }
   return tooltipEl;
 };
@@ -49,20 +49,20 @@ const customTooltips = context => {
     const bodyLines = tooltip.body.map(b => b.lines);
     const tableHead = document.createElement('thead');
     tableHead.classList.add(ClassName.TOOLTIP_HEADER);
-    titleLines.forEach(title => {
+    for (const title of titleLines) {
       const tr = document.createElement('tr');
       tr.style.borderWidth = 0;
       tr.classList.add(ClassName.TOOLTIP_HEADER_ITEM);
       const th = document.createElement('th');
       th.style.borderWidth = 0;
       const text = document.createTextNode(title);
-      th.appendChild(text);
-      tr.appendChild(th);
-      tableHead.appendChild(tr);
-    });
+      th.append(text);
+      tr.append(th);
+      tableHead.append(tr);
+    }
     const tableBody = document.createElement('tbody');
     tableBody.classList.add(ClassName.TOOLTIP_BODY);
-    bodyLines.forEach((body, i) => {
+    for (const [i, body] of bodyLines.entries()) {
       const colors = tooltip.labelColors[i];
       const span = document.createElement('span');
       span.style.background = colors.backgroundColor;
@@ -77,11 +77,11 @@ const customTooltips = context => {
       const td = document.createElement('td');
       td.style.borderWidth = 0;
       const text = document.createTextNode(body);
-      td.appendChild(span);
-      td.appendChild(text);
-      tr.appendChild(td);
-      tableBody.appendChild(tr);
-    });
+      td.append(span);
+      td.append(text);
+      tr.append(td);
+      tableBody.append(tr);
+    }
     const tableRoot = tooltipEl.querySelector('table');
 
     // Remove old children
@@ -90,8 +90,8 @@ const customTooltips = context => {
     }
 
     // Add new children
-    tableRoot.appendChild(tableHead);
-    tableRoot.appendChild(tableBody);
+    tableRoot.append(tableHead);
+    tableRoot.append(tableBody);
   }
   const {
     offsetLeft: positionX,
@@ -100,10 +100,10 @@ const customTooltips = context => {
 
   // Display, position, and set styles for font
   tooltipEl.style.opacity = 1;
-  tooltipEl.style.left = positionX + tooltip.caretX + 'px';
-  tooltipEl.style.top = positionY + tooltip.caretY + 'px';
+  tooltipEl.style.left = `${positionX + tooltip.caretX}px`;
+  tooltipEl.style.top = `${positionY + tooltip.caretY}px`;
   tooltipEl.style.font = tooltip.options.bodyFont.string;
-  tooltipEl.style.padding = tooltip.padding + 'px ' + tooltip.padding + 'px';
+  tooltipEl.style.padding = `${tooltip.padding}px ${tooltip.padding}px`;
 };
 
 export { customTooltips };

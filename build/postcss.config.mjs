@@ -1,14 +1,12 @@
-'use strict'
-
 const mapConfig = {
   inline: false,
   annotation: true,
   sourcesContent: true
 }
 
-module.exports = () => {
+export default context => {
   return {
-    map: mapConfig,
+    map: context.file.dirname.includes('examples') ? false : mapConfig,
     plugins: {
       autoprefixer: {
         cascade: false
