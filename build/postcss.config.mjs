@@ -1,12 +1,10 @@
-const mapConfig = {
-  inline: false,
-  annotation: true,
-  sourcesContent: true
-}
-
-export default context => {
+export default () => {
   return {
-    map: context.file.dirname.includes('examples') ? false : mapConfig,
+    map: {
+      inline: false,
+      annotation: true,
+      sourcesContent: true
+    },
     plugins: {
       autoprefixer: {
         cascade: false
