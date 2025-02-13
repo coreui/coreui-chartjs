@@ -1,3 +1,5 @@
+@use "@coreui/coreui/scss/variables" as *;
+
 $chartjs-tooltip-zindex:              $zindex-tooltip !default;
 $chartjs-tooltip-color:               var(--#{$prefix}body-bg) !default;
 $chartjs-tooltip-bg:                  rgba(var(--#{$prefix}emphasis-color-rgb), .8) !default;

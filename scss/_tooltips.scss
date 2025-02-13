@@ -1,4 +1,11 @@
-// Custom tooltips
+@use "@coreui/coreui/scss/mixins/border-radius" as *;
+@use "@coreui/coreui/scss/mixins/transition" as *;
+@use "@coreui/coreui/scss/variables" as *;
+@use "variables" as *;
+
+//
+// Chart.js custom tooltips
+//
 
 .chartjs-tooltip {
   // scss-docs-start chartjs-tooltip-css-vars
